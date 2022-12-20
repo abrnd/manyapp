@@ -9,6 +9,7 @@ import { useUser } from '../lib/authHooks';
 import { API_ROUTES, APP_ROUTES } from '../utils/constants';
 import AddTask from './Addtask';
 import ListTasks from './ListTasks';
+import { Container, Row, Col, Stack } from 'react-bootstrap';
 
 const Home = () => {
 
@@ -105,7 +106,8 @@ const Home = () => {
         }
     }
 
-    const submitTask = async () => {
+    const submitTask = async (e) => {
+        e.preventDefault();
         var bodyFormData = new FormData();
         bodyFormData.append('title', title);
         bodyFormData.append('content', content);
@@ -180,26 +182,34 @@ const Home = () => {
     }
 
     return(
-        <div>
-            <h1>Home</h1>
-            <AddTask 
-                title={title} 
-                content={content} 
-                onTitleChange={handleTitleChange} 
-                onContentChange={handleContentChange}
-                onFileChange={handleFileChange}
-                onSubmitTask={submitTask}
-            />
-            <ListTasks
-                user={user}
-                tasks={tasks}
-                status={status}
-                onGetExtentionFile={getExtensionFile}
-                onChangeStatus={updateTask}
-                onDeleteTask={deleteTask}
-            />
-            <button onClick={logout}><span>logout</span></button>
-        </div>
+        <Container>
+            <Stack gap={2}>
+                <h1>Home</h1>
+                <a className="text-end" onClick={logout} href="" >se déconnecter</a>
+            </Stack>    
+            <Row style={{marginTop: "1em"}}>
+                <Col md={2}>
+                    <AddTask 
+                        title={title} 
+                        content={content} 
+                        onTitleChange={handleTitleChange} 
+                        onContentChange={handleContentChange}
+                        onFileChange={handleFileChange}
+                        onSubmitTask={submitTask}
+                    />                
+                </Col>
+                <Col>
+                    <ListTasks
+                        user={user}
+                        tasks={tasks}
+                        status={status}
+                        onGetExtentionFile={getExtensionFile}
+                        onChangeStatus={updateTask}
+                        onDeleteTask={deleteTask}
+                    />
+                </Col>
+            </Row>
+        </Container>
     )
     
 }

@@ -1,9 +1,10 @@
 import * as React from 'react';
+import Form from 'react-bootstrap/Form';
 
 const Status = ({status, taskId, taskStatusId, currentStatus, onChangeStatus}) => {
 
     return(
-        <select name="status" value={taskStatusId} data-taskid={taskId} onChange={onChangeStatus}>
+        <Form.Select name="status" value={taskStatusId} data-taskid={taskId} onChange={onChangeStatus}>
             {status?.map( (stat) => {
                 if(currentStatus === "waiting"){
                     return <option key={stat.id} value={stat.id}>{stat.name}</option>
@@ -19,7 +20,7 @@ const Status = ({status, taskId, taskStatusId, currentStatus, onChangeStatus}) =
                     }
                 }
             })}
-        </select>
+        </Form.Select>
     );
 }
 

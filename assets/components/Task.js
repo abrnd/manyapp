@@ -1,6 +1,8 @@
 import * as React from 'react';
 import moment from 'moment';
 import Status from './Status';
+import Button from 'react-bootstrap/Button';
+
 
 
 const Task = ({user, task, status, onGetExtentionFile, onChangeStatus, onDeleteTask}) => {
@@ -10,7 +12,7 @@ const Task = ({user, task, status, onGetExtentionFile, onChangeStatus, onDeleteT
             <td>{task.content}</td>
             <td>{moment(task.createdAt).format("YYYY/MM/DD")}</td>
             <td>{ task.attachment
-                ? <button onClick={onGetExtentionFile} data-taskid={task.id}>download</button>
+                ? <Button variant="secondary" onClick={onGetExtentionFile} data-taskid={task.id}>download</Button>
                 : <span>pas de pièce jointe</span>
             }</td>
             {( () => {
@@ -29,7 +31,13 @@ const Task = ({user, task, status, onGetExtentionFile, onChangeStatus, onDeleteT
                             </td>
                             <td>{task.User.username}</td>
                             <td>
-                                <button onClick={onDeleteTask} data-taskid={task.id} >x</button>
+                                <Button 
+                                    variant="danger"
+                                    onClick={onDeleteTask} 
+                                    data-taskid={task.id} 
+                                >
+                                    x
+                                </Button>
                             </td>
                         </>
                     );
