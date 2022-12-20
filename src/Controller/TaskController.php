@@ -85,9 +85,6 @@ class TaskController extends AbstractController
         $extension = $fileInfo['extension'];
         $path = $this->getParameter('kernel.project_dir').'\public\uploads\attachments\\'.$fileName;
 
-        
-        dump($extension);
-
         return $this->file($path);
     }
 
